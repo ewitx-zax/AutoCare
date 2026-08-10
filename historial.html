@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Historial — AutoCare</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="assets/icons/favicon.png">
+  <meta name="theme-color" content="#00B4D8">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .page-title { font-size: 1.4rem; font-weight: 700; letter-spacing: -.03em; margin-bottom: 16px; }
+    .filters {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 16px;
+    }
+    /* Historial items */
+    .hist-item { margin-bottom: 12px; }
+    .hist-top { display: flex; align-items: flex-start; gap: 12px; }
+    .hist-icon { font-size: 1.6rem; line-height: 1; flex-shrink: 0; margin-top: 2px; }
+    .hist-info { flex: 1; min-width: 0; }
+    .hist-label { font-size: .9rem; font-weight: 700; }
+    .hist-meta { font-size: .72rem; color: var(--txt-muted); margin-top: 2px; font-variant-numeric: tabular-nums; }
+    .hist-cost { font-size: .85rem; font-weight: 700; color: var(--ok); font-variant-numeric: tabular-nums; white-space: nowrap; }
+    .hist-taller { font-size: .78rem; color: var(--txt-muted); margin-top: 8px; }
+    .hist-obs    { font-size: .78rem; color: var(--txt-muted); margin-top: 4px; font-style: italic; }
+    .hist-actions { margin-top: 10px; display: flex; justify-content: flex-end; }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <a href="index.html" class="topbar-logo">
+      <div class="logo-icon">
+        <svg viewBox="0 0 24 24" fill="white"><path d="M5 17H3a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h14l4 4v4a2 2 0 0 1-2 2h-2M7 17a2 2 0 1 0 0 4 2 2 0 0 0 0-4zM17 17a2 2 0 1 0 0 4 2 2 0 0 0 0-4z"/></svg>
+      </div>
+      AutoCare
+    </a>
+    <a href="mantenimiento.html" class="btn btn-primary" style="padding:7px 12px;font-size:.8rem">+ Nuevo</a>
+  </header>
+
+  <main class="page">
+    <h1 class="page-title">🕒 Historial</h1>
+
+    <div class="filters">
+      <select class="form-control" id="filter-tipo">
+        <option value="">Todos los servicios</option>
+        <option value="aceite">🛢️ Aceite</option>
+        <option value="filtro">🌬️ Filtro</option>
+        <option value="llantas">🔄 Llantas</option>
+        <option value="frenos">🛑 Frenos</option>
+        <option value="bateria">🔋 Batería</option>
+        <option value="afinacion">⚙️ Afinación</option>
+        <option value="general">🔧 General</option>
+      </select>
+      <select class="form-control" id="filter-sort">
+        <option value="km-desc">Km ↓</option>
+        <option value="km-asc">Km ↑</option>
+        <option value="fecha-desc">Fecha ↓</option>
+        <option value="fecha-asc">Fecha ↑</option>
+      </select>
+    </div>
+
+    <div id="historial-list"></div>
+  </main>
+
+  <nav class="bottom-nav">
+    <a href="index.html"        class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>Inicio</a>
+    <a href="vehiculo.html"     class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M5 17H3a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h14l4 4v4a2 2 0 0 1-2 2h-2"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></svg>Vehículo</a>
+    <a href="mantenimiento.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>Registro</a>
+    <a href="historial.html"    class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-.18-7.68"/><line x1="12" y1="7" x2="12" y2="12"/><polyline points="12 12 15 14"/></svg>Historial</a>
+    <a href="gastos.html"       class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>Gastos</a>
+  </nav>
+
+  <div id="toast-container"></div>
+  <script src="js/storage.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/historial.js"></script>
+</body>
+</html>
